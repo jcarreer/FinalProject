@@ -12,9 +12,9 @@ namespace SkyrimShop.DAL
         {
             var items = new List<Item>
             {
-            new Item{ItemName="AD", ItemType="Sword",ItemPrice=12.99M,ItemDescription="Blah",ItemID=1,ItemClass="Weapon"},
-          new Item{ItemName="FD", ItemType="Helm",ItemPrice=12.99M,ItemDescription="Blah",ItemID=2,ItemClass="Armor"},
-          new Item{ItemName="we", ItemType="Dagger",ItemPrice=12.99M,ItemDescription="Blah",ItemID=3,ItemClass="Weapon"},
+            new Item{ItemName="AD", ItemType="Sword",ItemPrice=12.99M,ItemDescription="Blah",ItemID=1,ItemClass=Item.ItemClassType.Weapon},
+          new Item{ItemName="FD", ItemType="Helm",ItemPrice=12.99M,ItemDescription="Blah",ItemID=2,ItemClass=Item.ItemClassType.Armor},
+          new Item{ItemName="we", ItemType="Dagger",ItemPrice=12.99M,ItemDescription="Blah",ItemID=3,ItemClass=Item.ItemClassType.Weapon},
             };
 
             items.ForEach(s => context.Items.Add(s));

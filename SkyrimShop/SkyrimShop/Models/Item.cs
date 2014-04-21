@@ -8,6 +8,12 @@ namespace SkyrimShop.Models
 {
     public class Item
     {
+        public enum ItemClassType
+        {
+            Weapon,
+            Armor
+        }
+
         public int ItemID { get; set; }
 
         [Display(Name  = "Name")]
@@ -24,8 +30,6 @@ namespace SkyrimShop.Models
         public string ItemDescription { get; set; }
 
         [Display(Name = "Class")]
-        public string ItemClass { get; set; }
-
-
+        public ItemClassType ItemClass { get; set; }
     }
 }
