@@ -6,9 +6,6 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 @using (Html.BeginForm())
 { 
 <p>
@@ -54,10 +51,7 @@
             @Html.DisplayFor(modelItem => item.QuantityItem)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ItemID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ItemID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ItemID })
-
+            @Html.ActionLink("Details", "Details", new { id=item.ItemID })
         </td>
     </tr>
 }
