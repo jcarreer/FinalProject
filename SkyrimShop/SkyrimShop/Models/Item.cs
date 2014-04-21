@@ -23,7 +23,9 @@ namespace SkyrimShop.Models
         [Display(Name = "Description")]
         public string ItemDescription { get; set; }
 
-        [Display(Name = "Quantity")]
-        public int QuantityItem { get; set; }
+        [Display(Name = "Class")]
+        public string ItemClass { get; set; }
+
+
     }
 }

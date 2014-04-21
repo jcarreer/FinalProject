@@ -28,7 +28,7 @@
         @Html.DisplayNameFor(model => model.ItemDescription)
     </th>
     <th>
-        @Html.DisplayNameFor(model => model.QuantityItem)
+        @Html.DisplayNameFor(model => model.ItemClass)
     </th>
     <th></th>
 </tr>
@@ -48,7 +48,7 @@
             @Html.DisplayFor(modelItem => item.ItemDescription)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.QuantityItem)
+            @Html.DisplayFor(modelItem => item.ItemClass)
         </td>
         <td>
             @Html.ActionLink("Details", "Details", new { id=item.ItemID })
