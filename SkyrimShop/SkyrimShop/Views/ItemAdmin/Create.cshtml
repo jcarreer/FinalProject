@@ -51,7 +51,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ItemClass, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ItemClass)
+                @Html.DropDownListFor(model => model.ItemClass, new SelectList(Enum.GetValues(typeof(SkyrimShop.Models.Item.ItemClassType))))
                 @Html.ValidationMessageFor(model => model.ItemClass)
             </div>
         </div>
