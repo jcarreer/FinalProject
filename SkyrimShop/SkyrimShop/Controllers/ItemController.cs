@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using SkyrimShop.Models;
 using SkyrimShop.DAL;
+using PagedList;
 
 namespace SkyrimShop.Controllers
 {
@@ -15,12 +16,24 @@ namespace SkyrimShop.Controllers
     {
         private ItemContext storeDB = new ItemContext();
 
-        public ActionResult Index(string sortOrder, string SearchString)
+        public ActionResult Index(string sortOrder, string currentFilter, string SearchString, int? page)
         {
+            ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.TypeSortParm = sortOrder == "type"? "type_desc" : "type";
+            ViewBag.TypeSortParm = sortOrder == "type" ? "type_desc" : "type";
             ViewBag.PriceSortParm = sortOrder == "price" ? "price_desc" : "price";
             ViewBag.ClassSortParm = sortOrder == "class" ? "class_desc" : "class";
+
+            if (SearchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                SearchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = SearchString;
 
             var items = from i in storeDB.Items
                         select i;
@@ -56,9 +69,11 @@ namespace SkyrimShop.Controllers
                     items = items.OrderBy(i => i.ItemName);
                     break;
             }
-
-            return View(items);
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(items.ToPagedList(pageNumber, pageSize));
         }
+
 
 
         // GET: /Item/Details/5

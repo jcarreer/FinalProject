@@ -1,32 +1,32 @@
-﻿@model IEnumerable<SkyrimShop.Models.Item>
-
+﻿
+@model PagedList.IPagedList<SkyrimShop.Models.Item>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Items";
 }
 
-<h2>Index</h2>
+<h2>Item Index</h2>
 
 @using (Html.BeginForm())
 { 
 <p>
-    Find: @Html.TextBox("SearchString")
+    Find: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
     <input type="submit" value="Search" />
 </p>
 }
 <table id ="Items" class="table">
     <tr>
     <th>
-        @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm })
+        @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
     </th>
     <th>
-        @Html.ActionLink("Type", "Index", new { sortOrder = ViewBag.TypeSortParm })
+        @Html.ActionLink("Type", "Index", new { sortOrder = ViewBag.TypeSortParm, currentFilter = ViewBag.CurrentFilter })
     </th>
     <th>
-        @Html.ActionLink("Price", "Index", new { sortOrder = ViewBag.PriceSortParm })
+        @Html.ActionLink("Price", "Index", new { sortOrder = ViewBag.PriceSortParm, currentFilter = ViewBag.CurrentFilter})
     </th>
-    <th>
-        @Html.DisplayNameFor(model => model.ItemDescription)
-    </th>
+<th></th>
     <th>
         @Html.ActionLink("Class", "Index", new { sortOrder = ViewBag.ClassSortParm })
     </th>
@@ -57,3 +57,8 @@
 }
 
 </table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
