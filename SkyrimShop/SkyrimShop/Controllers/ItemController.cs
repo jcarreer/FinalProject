@@ -18,8 +18,9 @@ namespace SkyrimShop.Controllers
         public ActionResult Index(string sortOrder, string SearchString)
         {
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.TypeSortParm = String.IsNullOrEmpty(sortOrder) ? "type" : "type_desc";
+            ViewBag.TypeSortParm = sortOrder == "type"? "type_desc" : "type";
             ViewBag.PriceSortParm = sortOrder == "price" ? "price_desc" : "price";
+            ViewBag.ClassSortParm = sortOrder == "class" ? "class_desc" : "class";
 
             var items = from i in storeDB.Items
                         select i;
@@ -44,6 +45,12 @@ namespace SkyrimShop.Controllers
                     break;
                 case "type_desc":
                     items = items.OrderByDescending(i => i.ItemType);
+                    break;
+                case "class":
+                    items = items.OrderBy(i => i.ItemClass);
+                    break;
+                case "class_desc":
+                    items = items.OrderByDescending(i => i.ItemClass);
                     break;
                 default:
                     items = items.OrderBy(i => i.ItemName);

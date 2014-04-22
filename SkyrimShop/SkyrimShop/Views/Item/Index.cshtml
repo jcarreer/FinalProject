@@ -9,11 +9,11 @@
 @using (Html.BeginForm())
 { 
 <p>
-    Find by name: @Html.TextBox("SearchString")
+    Find: @Html.TextBox("SearchString")
     <input type="submit" value="Search" />
 </p>
 }
-<table class="table">
+<table id ="Items" class="table">
     <tr>
     <th>
         @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm })
@@ -28,7 +28,7 @@
         @Html.DisplayNameFor(model => model.ItemDescription)
     </th>
     <th>
-        @Html.DisplayNameFor(model => model.ItemClass)
+        @Html.ActionLink("Class", "Index", new { sortOrder = ViewBag.ClassSortParm })
     </th>
     <th></th>
 </tr>
