@@ -43,22 +43,33 @@ namespace SkyrimShop.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            if (ModelState.IsValid)
+            using (var context = new ApplicationDbContext())
             {
-                var user = await UserManager.FindAsync(model.UserName, model.Password);
-                if (user != null)
+                if (ModelState.IsValid)
                 {
-                    await SignInAsync(user, model.RememberMe);
-                    return RedirectToLocal(returnUrl);
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Invalid username or password.");
-                }
-            }
+                    var user = new ApplicationUser() { UserName = model.UserName };
+                    var result = await UserManager.CreateAsync(user, model.Password);
 
-            // If we got this far, something failed, redisplay form
-            return View(model);
+                    var roleStore = new RoleStore<IdentityRole>(context);
+                    var roleManager = new RoleManager<IdentityRole>(roleStore);
+
+                    var userStore = new UserStore<ApplicationUser>(context);
+                    var userManager = new UserManager<ApplicationUser>(userStore);
+                    userManager.AddToRole(user.Id, "Admin");
+
+                    if (result.Succeeded)
+                    {
+                        await SignInAsync(user, isPersistent: false);
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        AddErrors(result);
+                    }
+                }
+                // If we got this far, something failed, redisplay form
+                return View(model);
+            }
         }
 
         //

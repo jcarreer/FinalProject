@@ -11,6 +11,7 @@ using SkyrimShop.DAL;
 
 namespace SkyrimShop.Controllers
 {
+    [Authorize(Roles="Admin")]
     public class ItemAdminController : Controller
     {
         private ItemContext db = new ItemContext();
