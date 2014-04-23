@@ -21,22 +21,23 @@
         @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
     </th>
     <th>
+        @Html.ActionLink("Class", "Index", new { sortOrder = ViewBag.ClassSortParm })
+    </th>
+    <th>
         @Html.ActionLink("Type", "Index", new { sortOrder = ViewBag.TypeSortParm, currentFilter = ViewBag.CurrentFilter })
     </th>
     <th>
         @Html.ActionLink("Price", "Index", new { sortOrder = ViewBag.PriceSortParm, currentFilter = ViewBag.CurrentFilter})
     </th>
-<th></th>
-    <th>
-        @Html.ActionLink("Class", "Index", new { sortOrder = ViewBag.ClassSortParm })
-    </th>
-    <th></th>
 </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.ItemName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ItemClass)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ItemType)
@@ -46,9 +47,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ItemDescription)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ItemClass)
         </td>
         <td>
             @Html.ActionLink("Details", "Details", new { id=item.ItemID })
