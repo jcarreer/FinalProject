@@ -1,22 +1,16 @@
 ﻿@{
     ViewBag.Title = "Home Page";
-  
 }
 
-
-
-<div class="jumbotron">
-    <h1>Skyrim</h1>
-</div>
-
-<div class="home">
-    <div class="row">
-        <div class="col-md-4">
-            <h2>Welcome to Shop Skyrim</h2>
-            <p>
-                Shop Skyrim is a sample application that
-                demonstrates what we learn in CIS 411
-            </p>
-        </div>
+@Styles.Render("~/Content/css")
+<div class="row">
+    <div class="col-md-10">
+        <h2>Welcome to Shop Skyrim</h2>
+        <p>
+            Shop Skyrim is a sample application that demonstrates what we learn in CIS 411.
+            You can go to the Item page and browse all of the items that we have in the store.
+            If you sign up for an account, you will automatically become an ADMIN! That means
+            you can edit the items in our store, and even add new items of your own!
+        </p>
     </div>
 </div>
